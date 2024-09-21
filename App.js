@@ -9,7 +9,7 @@ import {
 } from "@web3modal/wagmi-react-native";
 import { Provider } from "react-redux";
 import { store } from "./src/store/store";
-import MainComponent from "./src/components/MainComponent";
+import AppNavigator from "./src/navigation/AppNavigator";
 
 // 0. Setup queryClient
 const queryClient = new QueryClient();
@@ -48,7 +48,7 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <Web3Modal />
-          <MainComponent />
+          <AppNavigator />
         </Provider>
       </QueryClientProvider>
     </WagmiProvider>
