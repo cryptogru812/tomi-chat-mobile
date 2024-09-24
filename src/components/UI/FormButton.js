@@ -1,11 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import Color from "../../constants/Color"
 
-const FormButton = ({ label, text }) => {
+const FormButton = ({ label, text, onPress, style }) => {
   return (
-    <View style={{ display: "flex", gap: 8, width: "100%" }}>
-      <Text style={styles.label}>{label}</Text>
-      <TouchableOpacity style={styles.button}>
+    <View style={[style, { display: "flex", gap: 8, width: "100%" }]}>
+      {label && <Text style={styles.label}>{label}</Text>}
+      <TouchableOpacity style={styles.button} onPress={onPress}>
         <Text style={styles.text}>{text}</Text>
       </TouchableOpacity>
     </View>
