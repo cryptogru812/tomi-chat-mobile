@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native"
+import { useRouter } from "expo-router"
 import Checkbox from "expo-checkbox"
 
 import Color from "../../constants/Color"
@@ -8,10 +9,11 @@ import CustomButton from "../../components/UI/CustomButton"
 import FormInput from "../../components/UI/FormInput"
 import FormButton from "../../components/UI/FormButton"
 
-const Logo = require("../../../assets/images/logo.png")
-const Background = require("../../../assets/images/background.png")
+const Logo = require("../../assets/images/logo.png")
+const Background = require("../../assets/images/background.png")
 
-const CreateProfileScreen = (props) => {
+const CreateProfileScreen = () => {
+  const router = useRouter()
   const [isChecked, setChecked] = useState(false);
 
   return (
@@ -58,7 +60,7 @@ const CreateProfileScreen = (props) => {
                 {" "}of Tomi
               </Text>
             </View>
-            <FormButton text={"Create Account"} onPress={() => props.navigation.navigate("Login")} />
+            <FormButton text={"Create Account"} onPress={() => router.push("signin")} />
           </View>
         </View>
       </ImageBackground>
