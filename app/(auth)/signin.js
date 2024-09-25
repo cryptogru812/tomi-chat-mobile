@@ -1,14 +1,16 @@
 import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native"
+import { useRouter } from "expo-router"
 
 import Color from "../../constants/Color"
 import Device from "../../constants/Device"
 import FormInput from "../../components/UI/FormInput"
 import FormButton from "../../components/UI/FormButton"
 
-const Logo = require("../../../assets/images/logo.png")
-const Background = require("../../../assets/images/background.png")
+const Logo = require("../../assets/images/logo.png")
+const Background = require("../../assets/images/background.png")
 
-const LoginScreen = (props) => {
+const LoginScreen = () => {
+  const router = useRouter()
   return (
     <ScrollView style={styles.screen}>
       <ImageBackground source={Background} style={styles.background}>
@@ -31,7 +33,7 @@ const LoginScreen = (props) => {
             <FormInput label={"Wallet Address"} placeholder={"wallet address"} />
             <FormInput label={"Password"} placeholder={"Password"} type={"password"} />
             <Text style={styles.paragraph}>Forgot Password?</Text>
-            <FormButton text={"Sign in"} onPress={() => props.navigation.navigate("Create")} style={{ marginTop: 8 }} />
+            <FormButton text={"Sign in"} onPress={() => router.push("chats")} style={{ marginTop: 8 }} />
           </View>
         </View>
       </ImageBackground>
