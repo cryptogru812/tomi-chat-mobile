@@ -11,6 +11,7 @@ const Background = require("../../assets/images/background.png")
 
 const LoginScreen = () => {
   const router = useRouter()
+
   return (
     <ScrollView style={styles.screen}>
       <ImageBackground source={Background} style={styles.background}>
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 0.05 * Device.width,
     paddingVertical: 16,
-    height: Device.height - 24,
+    height: Device.height,
   },
 
   logo: {
