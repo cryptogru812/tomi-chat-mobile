@@ -8,7 +8,9 @@ import {
   Web3Modal,
 } from "@web3modal/wagmi-react-native";
 import { Provider } from "react-redux";
+import { SafeAreaView } from "react-native";
 import { Slot } from "expo-router";
+
 import { store } from "../store/store";
 
 // 0. Setup queryClient
@@ -47,8 +49,10 @@ export default function MainLayout() {
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <Web3Modal />
-          <Slot />
+          <SafeAreaView style={{ flex: 1 }}>
+            <Web3Modal />
+            <Slot />
+          </SafeAreaView>
         </Provider>
       </QueryClientProvider>
     </WagmiProvider>

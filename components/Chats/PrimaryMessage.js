@@ -1,0 +1,29 @@
+import { StyleSheet, Text, View } from "react-native"
+import Color from "../../constants/Color"
+
+const PrimaryMessage = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.message}>I was asking for your New Year Plans, ask we are going to host a party.</Text>
+    </View>
+  )
+}
+
+export default PrimaryMessage
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Color.primary,
+    borderRadius: 40,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+    paddingHorizontal: 32,
+    paddingVertical: 16,
+    alignSelf: "flex-start",
+  },
+
+  message: {
+    color: "white",
+    fontSize: 18,
+  }
+})

@@ -3,5 +3,5 @@ export default {
   secondary: "#FF008326",
   border: "#FF00831A",
   white: "#fff",
-  black: "#000",
+  dark: "#111111",
 }
