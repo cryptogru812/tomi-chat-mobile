@@ -4,26 +4,23 @@ import Color from "../../constants/Color"
 
 const Avatar = require("../../assets/images/avatar.png")
 
-const ChatCard = ({ onPress }) => {
+const RoomCard = ({ onPress }) => {
   return (
     <SafeAreaView>
       <TouchableOpacity style={styles.container} onPress={onPress}>
         <Image source={Avatar} style={styles.avatar} />
 
         <View style={{ flex: 1, gap: 8 }}>
-          <View>
-            <Text style={styles.name}>Christopher Campbell</Text>
-            <Text style={styles.address}>0xc457...2243</Text>
-          </View>
+          <Text style={styles.name}>Blockchain community</Text>
 
-          <Text style={styles.content}>In front of the Bar, about which...</Text>
+          <Text style={styles.content}>1000+ People</Text>
         </View>
       </TouchableOpacity>
     </SafeAreaView>
   )
 }
 
-export default ChatCard
+export default RoomCard
 
 const styles = StyleSheet.create({
   container: {
@@ -46,11 +43,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "semibold",
     color: "#C9C9C9",
-  },
-
-  address: {
-    fontSize: 16,
-    color: "white",
   },
 
   content: {

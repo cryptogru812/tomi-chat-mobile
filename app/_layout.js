@@ -7,8 +7,8 @@ import {
   defaultWagmiConfig,
   Web3Modal,
 } from "@web3modal/wagmi-react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
-import { SafeAreaView } from "react-native";
 import { Slot } from "expo-router";
 
 import { store } from "../store/store";

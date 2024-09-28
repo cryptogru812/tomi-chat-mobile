@@ -19,6 +19,13 @@ export default function ChatLayout() {
             title: 'ROOMS',
           }}
         />
+        <Drawer.Screen
+          name="settings"
+          options={{
+            drawerLabel: 'Settings',
+            title: 'SETTINGS',
+          }}
+        />
         {/* <Drawer.Screen
           name="contacts"
           options={{

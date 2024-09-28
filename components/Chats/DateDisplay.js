@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Color.dark,
     borderRadius: 48,
-    marginVertical: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 48,
+    marginVertical: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 40,
     alignSelf: "center",
   },
 
