@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 40,
     borderBottomRightRadius: 0,
-    paddingHorizontal: 32,
-    paddingVertical: 16,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
     alignSelf: "flex-end",
   },
 

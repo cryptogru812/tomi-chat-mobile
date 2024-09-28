@@ -32,7 +32,10 @@ const ChatDetail = () => {
         </View>
 
         <ScrollView contentContainerStyle={{ gap: 12 }} style={styles.message}>
-          <PrimaryMessage />
+          <View style={{ flex: 1, flexDirection: "row", alignItems: "center", gap: 8 }}>
+            <Image source={Avatar} style={styles.avatar1} />
+            <PrimaryMessage style={{ width: "80%" }} />
+          </View>
           <PrimaryFollowingMessage />
           <SecondaryMessage />
           <DateDisplay />
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.dark,
     width: "100%",
     paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingVertical: 8,
     borderBottomLeftRadius: 24,
     gap: 16,
     alignItems: "center",
@@ -79,6 +82,14 @@ const styles = StyleSheet.create({
 
   avatar: {
     borderRadius: 9999999,
+    width: 70,
+    height: 70,
+  },
+
+  avatar1: {
+    borderRadius: 9999999,
+    width: 60,
+    height: 60,
   },
 
   name: {

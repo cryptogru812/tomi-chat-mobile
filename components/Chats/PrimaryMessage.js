@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native"
 import Color from "../../constants/Color"
 
-const PrimaryMessage = () => {
+const PrimaryMessage = ({ style }) => {
   return (
-    <View style={styles.container}>
+    <View style={[style, styles.container]}>
       <Text style={styles.message}>I was asking for your New Year Plans, ask we are going to host a party.</Text>
     </View>
   )
@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
-    paddingHorizontal: 32,
-    paddingVertical: 16,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
     alignSelf: "flex-start",
   },
 
