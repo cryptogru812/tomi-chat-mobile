@@ -17,7 +17,10 @@ const CreateProfileScreen = () => {
   const [isChecked, setChecked] = useState(false);
 
   return (
-    <ScrollView style={styles.screen}>
+    <ScrollView
+      contentContainerStyle={styles.screen}
+      keyboardShouldPersistTaps="handled"
+    >
       <ImageBackground source={Background} style={styles.background}>
         <Image source={Logo} resizeMode="contain" style={styles.logo} />
 
@@ -72,8 +75,8 @@ export default CreateProfileScreen
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    flexDirection: "column",
+    flexGrow: 1,
+    backgroundColor: "black",
   },
 
   background: {
@@ -83,18 +86,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 0.05 * Device.width,
     paddingVertical: 16,
-    height: Device.height,
+    minHeight: Device.height,
   },
 
   logo: {
     position: "absolute",
-    top: 20,
+    top: 24,
     height: 40,
   },
 
   modal: {
     position: "absolute",
-    top: 84,
+    top: 96,
     display: "flex",
     backgroundColor: Color.secondary,
     width: "100%",

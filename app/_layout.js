@@ -7,7 +7,7 @@ import {
   defaultWagmiConfig,
   Web3Modal,
 } from "@web3modal/wagmi-react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import { Slot } from "expo-router";
 
@@ -46,15 +46,17 @@ createWeb3Modal({
 
 export default function MainLayout() {
   return (
-    <WagmiProvider config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <SafeAreaView style={{ flex: 1 }}>
-            <Web3Modal />
-            <Slot />
-          </SafeAreaView>
-        </Provider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <SafeAreaProvider>
+      <WagmiProvider config={wagmiConfig}>
+        <QueryClientProvider client={queryClient}>
+          <Provider store={store}>
+            <SafeAreaView style={{ flex: 1 }}>
+              <Web3Modal />
+              <Slot />
+            </SafeAreaView>
+          </Provider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </SafeAreaProvider>
   );
 }
