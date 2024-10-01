@@ -1,4 +1,5 @@
 import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useRouter } from "expo-router"
 
 import Color from "../../constants/Color"
@@ -11,10 +12,14 @@ const Background = require("../../assets/images/background.png")
 
 const LoginScreen = () => {
   const router = useRouter()
+  const insets = useSafeAreaInsets();
 
   return (
-    <ScrollView style={styles.screen}>
-      <ImageBackground source={Background} style={styles.background}>
+    <ScrollView
+      contentContainerStyle={styles.screen}
+      keyboardShouldPersistTaps="handled"
+    >
+      <ImageBackground source={Background} style={[styles.background, { minHeight: Device.height - insets.bottom - insets.top }]}>
         <Image source={Logo} resizeMode="contain" style={styles.logo} />
 
         <View style={styles.modal}>
@@ -46,8 +51,8 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    flexDirection: "column",
+    flexGrow: 1,
+    backgroundColor: "black",
   },
 
   background: {
@@ -57,12 +62,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 0.05 * Device.width,
     paddingVertical: 16,
-    height: Device.height,
   },
 
   logo: {
     position: "absolute",
-    top: 20,
+    top: 24,
     height: 40,
   },
 
