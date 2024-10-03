@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 0.05 * Device.width,
     paddingVertical: 16,
-    minHeight: Device.height,
+    minHeight: 930,
   },
 
   logo: {
