@@ -1,13 +1,22 @@
-import { StyleSheet, ScrollView, View, Text } from "react-native"
+import { ScrollView, View, Text, useColorScheme } from "react-native"
 import { DrawerToggleButton } from "@react-navigation/drawer";
+import { useSelector } from "react-redux";
 import { useRouter } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 
-import Color from "../../constants/Color";
 import RoomCard from "../../components/Rooms/RoomCard";
+import { darkColor, lightColor } from "../../constants/Color";
+import { getStyles } from "./style";
 
 const RoomsScreen = () => {
   const router = useRouter()
+  const colorScheme = useColorScheme()
+  const theme = useSelector((state) => state.theme.theme)
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+
+  const Color = activeTheme === "dark" ? darkColor : lightColor
+  const styles = getStyles(activeTheme)
 
   return (
     <ScrollView style={styles.screen}>
@@ -38,31 +47,3 @@ const RoomsScreen = () => {
 }
 
 export default RoomsScreen
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: "black",
-  },
-
-  header: {
-    flex: 1,
-    flexDirection: "row",
-    paddingTop: 8,
-    paddingHorizontal: 8,
-    alignItems: "center",
-    gap: 8,
-  },
-
-  title: {
-    fontSize: 24,
-    color: Color.primary,
-  },
-
-  container: {
-    display: "flex",
-    gap: 16,
-    paddingHorizontal: 16,
-    marginTop: 16,
-  }
-})

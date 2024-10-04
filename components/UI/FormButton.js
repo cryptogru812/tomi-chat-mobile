@@ -1,7 +1,15 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import Color from "../../constants/Color"
+import { Text, TouchableOpacity, useColorScheme, View } from "react-native"
+import { useSelector } from "react-redux"
+
+import { getStyles } from "./style"
 
 const FormButton = ({ label, text, onPress, style }) => {
+  const colorScheme = useColorScheme()
+  const theme = useSelector((state) => state.theme.theme)
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+  const styles = getStyles(activeTheme)
+
   return (
     <View style={[style, { display: "flex", gap: 8, width: "100%" }]}>
       {label && <Text style={styles.label}>{label}</Text>}
@@ -13,21 +21,3 @@ const FormButton = ({ label, text, onPress, style }) => {
 }
 
 export default FormButton
-
-const styles = StyleSheet.create({
-  label: {
-    color: "white",
-    fontWeight: "700",
-  },
-  button: {
-    backgroundColor: Color.primary,
-    borderRadius: 8,
-    paddingVertical: 10,
-  },
-  text: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "700",
-    textAlign: "center",
-  }
-})

@@ -1,31 +1,20 @@
-import { StyleSheet, Text, View } from "react-native"
-import Color from "../../constants/Color"
+import { Text, useColorScheme, View } from "react-native"
+import { useSelector } from "react-redux"
+
+import { getStyles } from "./style"
 
 const DateDisplay = () => {
+  const colorScheme = useColorScheme()
+  const theme = useSelector((state) => state.theme.theme)
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+  const styles = getStyles(activeTheme)
+
   return (
-    <View style={styles.container}>
+    <View style={styles.dateContainer}>
       <Text style={styles.date}>10/09/2024 10:00 PM</Text>
     </View>
   )
 }
 
 export default DateDisplay
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: Color.dark,
-    borderRadius: 48,
-    marginVertical: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 40,
-    alignSelf: "center",
-  },
-
-  date: {
-    color: "#58677A",
-    fontSize: 18,
-  }
-})

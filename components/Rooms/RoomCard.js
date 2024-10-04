@@ -1,10 +1,17 @@
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Image, SafeAreaView, Text, TouchableOpacity, useColorScheme, View } from "react-native"
+import { useSelector } from "react-redux"
 
-import Color from "../../constants/Color"
+import { getStyles } from "../Chats/style"
 
 const Avatar = require("../../assets/images/avatar.png")
 
 const RoomCard = ({ onPress }) => {
+  const colorScheme = useColorScheme()
+  const theme = useSelector((state) => state.theme.theme)
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+  const styles = getStyles(activeTheme)
+
   return (
     <SafeAreaView>
       <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -21,32 +28,3 @@ const RoomCard = ({ onPress }) => {
 }
 
 export default RoomCard
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    backgroundColor: Color.dark,
-    width: "100%",
-    paddingHorizontal: 16,
-    paddingVertical: 24,
-    borderRadius: 24,
-    gap: 16,
-    alignItems: "center",
-  },
-
-  avatar: {
-    borderRadius: 9999999,
-  },
-
-  name: {
-    fontSize: 24,
-    fontWeight: "semibold",
-    color: "#C9C9C9",
-  },
-
-  content: {
-    fontSize: 16,
-    color: "white",
-  }
-})

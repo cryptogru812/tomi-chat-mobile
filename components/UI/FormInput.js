@@ -1,29 +1,24 @@
-import { StyleSheet, Text, TextInput, View } from "react-native"
+import { Text, TextInput, useColorScheme, View } from "react-native"
+import { useSelector } from "react-redux"
+
+import { darkColor, lightColor } from "../../constants/Color"
+import { getStyles } from "./style"
 
 const FormInput = ({ label, placeholder, type }) => {
+  const colorScheme = useColorScheme()
+  const theme = useSelector((state) => state.theme.theme)
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+  
+  const styles = getStyles(activeTheme)
+  const Color = activeTheme === "dark" ? darkColor : lightColor
+
   return (
     <View style={{ display: "flex", gap: 8, width: "100%" }}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput placeholder={placeholder} placeholderTextColor={"#BCBEC0"} style={styles.input} secureTextEntry={type === "password"} />
+      <TextInput placeholder={placeholder} placeholderTextColor={Color.placeholder} style={styles.formInput} secureTextEntry={type === "password"} />
     </View>
   )
 }
 
 export default FormInput
-
-const styles = StyleSheet.create({
-  label: {
-    color: "white",
-    fontWeight: "700",
-  },
-  input: {
-    backgroundColor: "white",
-    borderRadius: 5,
-    borderColor: "#BCBEC0",
-    borderWidth: 1,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    fontSize: 14,
-    fontWeight: "700",
-  },
-})
