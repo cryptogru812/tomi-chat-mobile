@@ -1,13 +1,20 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native"
+import { ScrollView, Text, useColorScheme, View } from "react-native"
+import { useSelector } from "react-redux"
 import { Drawer } from "expo-router/drawer"
 
 import SettingInput from "../../components/Settings/SettingInput"
 import CustomButton from "../../components/UI/CustomButton"
-import Color from "../../constants/Color"
+import { getStyles } from "./style"
 
 const SettingsScreen = () => {
+  const colorScheme = useColorScheme()
+  const theme = useSelector((state) => state.theme.theme)
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+  const styles = getStyles(activeTheme)
+
   return (
-    <ScrollView style={styles.screen}>
+    <ScrollView style={[styles.screen, { paddingHorizontal: 24 }]}>
       <Drawer.Screen
         options={{
           title: "SETTINGS",
@@ -16,7 +23,7 @@ const SettingsScreen = () => {
       />
 
       <View style={styles.form}>
-        <Text style={styles.header}>Settings</Text>
+        <Text style={styles.settingHeader}>Settings</Text>
 
         <SettingInput label={"FIRST NAME"} placeholder={"FIRST NAME"} />
         <SettingInput label={"LAST NAME"} placeholder={"LAST NAME"} />
@@ -30,7 +37,7 @@ const SettingsScreen = () => {
       <View style={styles.hr} />
 
       <View style={styles.form}>
-        <Text style={styles.header}>Change Password</Text>
+        <Text style={styles.settingHeader}>Change Password</Text>
 
         <SettingInput label={"CURRENT PASSWORD"} placeholder={"CURRENT PASSWORD"} type={"password"} />
         <SettingInput label={"NEW PASSWORD"} placeholder={"NEW PASSWORD"} type={"password"} />
@@ -45,45 +52,3 @@ const SettingsScreen = () => {
 }
 
 export default SettingsScreen
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: "black",
-    paddingHorizontal: 24,
-  },
-
-  form: {
-    flex: 1,
-    paddingVertical: 24,
-    gap: 24,
-    alignItems: "center",
-  },
-
-  header: {
-    fontSize: 24,
-    color: "white",
-  },
-
-  button: {
-    color: "white",
-    backgroundColor: Color.primary,
-    paddingHorizontal: 32,
-    paddingVertical: 12,
-    fontSize: 16,
-    fontWeight: "600",
-    borderRadius: 24,
-  },
-
-  hr: {
-    borderBottomColor: 'white',
-    borderBottomWidth: 1,
-    marginVertical: 16,
-  },
-
-  footer: {
-    color: "white",
-    fontSize: 14,
-    textAlign: "center",
-  },
-})

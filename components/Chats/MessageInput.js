@@ -1,15 +1,33 @@
-import { Image, StyleSheet, TextInput, View } from "react-native"
-import Color from "../../constants/Color"
+import { Image, TextInput, useColorScheme, View } from "react-native"
+import { useSelector } from "react-redux"
 
-const AttachmentIcon = require("../../assets/icons/attachment.png")
-const MicIcon = require("../../assets/icons/mic.png")
-const PlaneIcon = require("../../assets/icons/plane.png")
+import { darkColor, lightColor } from "../../constants/Color"
+import { getStyles } from "./style"
+
+const DarkAttachmentIcon = require("../../assets/icons/attachment-dark.png")
+const DarkMicIcon = require("../../assets/icons/mic-dark.png")
+const DarkPlaneIcon = require("../../assets/icons/plane-dark.png")
+const LightAttachmentIcon = require("../../assets/icons/attachment-light.png")
+const LightMicIcon = require("../../assets/icons/mic-light.png")
+const LightPlaneIcon = require("../../assets/icons/plane-light.png")
 
 const MessageInput = () => {
+  const colorScheme = useColorScheme()
+  const theme = useSelector((state) => state.theme.theme)
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+
+  const Color = activeTheme === "dark" ? darkColor : lightColor
+  const styles = getStyles(activeTheme)
+
+  const AttachmentIcon = activeTheme === "dark" ? DarkAttachmentIcon : LightAttachmentIcon
+  const MicIcon = activeTheme === "dark" ? DarkMicIcon : LightMicIcon
+  const PlaneIcon = activeTheme === "dark" ? DarkPlaneIcon : LightPlaneIcon
+
   return (
-    <View style={styles.container}>
+    <View style={styles.messageContainer}>
       <Image source={AttachmentIcon} style={styles.attachmentIcon} />
-      <TextInput style={styles.input} placeholder="Type your Message..." placeholderTextColor="#A6ADB5" />
+      <TextInput style={styles.input} placeholder="Type your Message..." placeholderTextColor={Color.messagePlaceholder} />
       <Image source={MicIcon} style={styles.micIcon} />
       <Image source={PlaneIcon} style={styles.planeIcon} />
     </View>
@@ -17,46 +35,3 @@ const MessageInput = () => {
 }
 
 export default MessageInput
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    position: "relative",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-  },
-
-  attachmentIcon: {
-    position: "absolute",
-    top: 24,
-    left: 16,
-    zIndex: 10,
-  },
-
-  micIcon: {
-    position: "absolute",
-    top: 28,
-    right: 56,
-    zIndex: 10,
-  },
-
-  planeIcon: {
-    position: "absolute",
-    top: 28,
-    right: 16,
-    zIndex: 10,
-  },
-
-  input: {
-    width: "100%",
-    height: 88,
-    backgroundColor: Color.dark,
-    color: "white",
-    borderRadius: 0,
-    borderTopRightRadius: 24,
-    fontSize: 18,
-    paddingHorizontal: 60,
-    paddingRight: 92,
-  }
-})

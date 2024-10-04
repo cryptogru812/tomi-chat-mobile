@@ -1,9 +1,16 @@
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import Color from '../../constants/Color';
 import { useState } from 'react';
+import { View, TouchableOpacity, useColorScheme } from 'react-native';
+import { useSelector } from 'react-redux';
+
+import { getStyles } from './style';
 
 const FormCheckbox = () => {
   const [isChecked, setIsChecked] = useState(false)
+  const colorScheme = useColorScheme()
+  const theme = useSelector((state) => state.theme.theme)
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+  const styles = getStyles(activeTheme)
   
   return (
     <TouchableOpacity onPress={() => setIsChecked(!isChecked)}>
@@ -13,28 +20,5 @@ const FormCheckbox = () => {
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  checkbox: {
-    width: 20,
-    height: 20,
-    backgroundColor: "#D5DAE1",
-    borderWidth: 1,
-    borderColor: "#D5DAE1",
-    borderRadius: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checked: {
-    backgroundColor: Color.primary,
-    borderColor: Color.primary,
-  },
-  checkMark: {
-    width: 10,
-    height: 10,
-    backgroundColor: 'white',
-    borderRadius: 3,
-  },
-});
 
 export default FormCheckbox;

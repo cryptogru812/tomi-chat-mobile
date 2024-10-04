@@ -1,17 +1,22 @@
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
+  useColorScheme,
 } from 'react-native';
-
-import Color from "../../constants/Color"
+import { useSelector } from 'react-redux';
+import { getStyles } from './style';
 
 const CustomButton = ({ onPress, title, style }) => {
   const textStyle = style ? style : styles.textStyle;
+  const colorScheme = useColorScheme()
+  const theme = useSelector((state) => state.theme.theme)
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+  const styles = getStyles(activeTheme)
 
   return (
-    <View style={styles.container}>
+    <View style={styles.buttonWrapper}>
       <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
         <Text style={textStyle}>{title}</Text>
       </TouchableOpacity>
@@ -20,22 +25,3 @@ const CustomButton = ({ onPress, title, style }) => {
 };
 
 export default CustomButton;
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  buttonContainer: {
-    justifyContent: 'center',
-    overflow: 'hidden',
-    paddingHorizontal: 30,
-    borderRadius: 8,
-  },
-  textStyle: {
-    textAlign: 'center',
-    color: Color.white,
-    fontSize: 18,
-  },
-});

@@ -1,18 +1,44 @@
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native"
+import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native"
+import { useDispatch, useSelector } from "react-redux"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useRouter } from "expo-router"
+import { Moon, Sun } from "lucide-react-native"
 
-import Color from "../../constants/Color"
 import Device from "../../constants/Device"
+import { darkColor, lightColor } from "../../constants/Color"
 import FormInput from "../../components/UI/FormInput"
 import FormButton from "../../components/UI/FormButton"
+import { setTheme } from "../../store/themeSlice"
+import { getStyles } from "./style"
 
 const Logo = require("../../assets/images/logo.png")
-const Background = require("../../assets/images/background.png")
+const DarkBackground = require("../../assets/images/background-dark.png")
+const LightBackground = require("../../assets/images/background-light.png")
 
 const LoginScreen = () => {
   const router = useRouter()
-  const insets = useSafeAreaInsets();
+  const colorScheme = useColorScheme()
+  const dispatch = useDispatch()
+  const theme = useSelector((state) => state.theme.theme)
+  const insets = useSafeAreaInsets()
+
+  const activeTheme = theme === "automatic" ? colorScheme : theme
+
+  const Background = activeTheme === "dark" ? DarkBackground : LightBackground
+  const Color = activeTheme === "dark" ? darkColor : lightColor
+  const styles = getStyles(activeTheme)
+
+  const handleThemeChange = (selectedTheme) => {
+    dispatch(setTheme(selectedTheme))
+  };
 
   return (
     <ScrollView
@@ -21,8 +47,13 @@ const LoginScreen = () => {
     >
       <ImageBackground source={Background} style={[styles.background, { minHeight: Device.height - insets.bottom - insets.top }]}>
         <Image source={Logo} resizeMode="contain" style={styles.logo} />
+        <TouchableOpacity style={styles.theme} onPress={() => handleThemeChange(activeTheme === "dark" ? "light" : "dark")}>
+          {
+            activeTheme === "dark" ? <Sun size={24} color="white" /> : <Moon size={24} color={Color.primary} />
+          }
+        </TouchableOpacity>
 
-        <View style={styles.modal}>
+        <View style={[styles.modal, { marginTop: 24 }]}>
           <View style={{ display: "flex", gap: 24, alignItems: "center" }}>
             <Text style={[styles.title, { lineHeight: 32 }]}>
               {"Tomi "}
@@ -48,55 +79,3 @@ const LoginScreen = () => {
 }
 
 export default LoginScreen
-
-const styles = StyleSheet.create({
-  screen: {
-    flexGrow: 1,
-    backgroundColor: "black",
-  },
-
-  background: {
-    position: "relative",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 0.05 * Device.width,
-    paddingVertical: 16,
-  },
-
-  logo: {
-    position: "absolute",
-    top: 24,
-    height: 40,
-  },
-
-  modal: {
-    position: "absolute",
-    display: "flex",
-    backgroundColor: Color.secondary,
-    width: "100%",
-    gap: 24,
-    margin: "auto",
-    marginTop: 24,
-    paddingHorizontal: 10,
-    paddingVertical: 16,
-    borderWidth: 2,
-    borderRadius: 28,
-    borderColor: Color.border,
-    alignItems: "center",
-  },
-
-  title: {
-    color: "white",
-    fontSize: 24,
-    fontWeight: "700",
-    textAlign: "center",
-  },
-
-  paragraph: {
-    color: "white",
-    fontWeight: "400",
-    lineHeight: 16,
-    marginTop: 4,
-  }
-})
